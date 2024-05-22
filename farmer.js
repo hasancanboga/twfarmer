@@ -24,10 +24,10 @@ function farmDesktop() {
         let ninthCell = row.cells[8];
         let tenthCell = row.cells[9];
 
-        let img = secondCell.querySelector('img[src*="green.png"], img[src*="yellow.png"]');
+        let img = secondCell.querySelector('img[src*="green"], img[src*="yellow"]');
         if (img) {
-            let isGreen = img.src.includes('green.png');
-            let isYellow = img.src.includes('yellow.png');
+            let isGreen = img.src.includes('green');
+            let isYellow = img.src.includes('yellow');
 
             if (isGreen) {
                 let seventhData = seventhCell.textContent.trim();
@@ -50,8 +50,9 @@ function farmDesktop() {
 }
 
 function farmMobile() {
-    let rows = Array.from(document.querySelectorAll('tbody tr'));
-    let index = 0;
+
+    let rows = Array.from(document.querySelectorAll('#plunder_list tbody tr'));
+    let index = 1;
 
     let interval = setInterval(function () {
         if (index >= rows.length) {
@@ -62,22 +63,27 @@ function farmMobile() {
         let firstRow = rows[index];
         let thirdRow = rows[index + 2];
 
-        let img = firstRow.querySelector('img[src*="green.png"], img[src*="yellow.png"]');
+        let img = firstRow.querySelector('img[src*="green"], img[src*="yellow"]');
+
         if (img) {
-            let isGreen = img.src.includes('green.png');
-            let isYellow = img.src.includes('yellow.png');
+            let isGreen = img.src.includes('green');
+            let isYellow = img.src.includes('yellow');
 
             if (isGreen) {
-                let wallData = thirdRow.cells[0].textContent.trim();
+
+                let wallData = firstRow.cells[1].textContent.trim()[0];
+
                 if (wallData === '?' || wallData === '0') {
-                    clickLink(firstRow, 'a.farm_icon_a');
+                    clickLink(thirdRow.cells[0], 'a.farm_icon_a');
                 } else if (wallData === '1') {
-                    clickLink(firstRow, 'a.farm_icon_b');
+                    clickLink(thirdRow.cells[0], 'a.farm_icon_b');
                 }
             } else if (isYellow) {
-                let wallData = thirdRow.cells[0].textContent.trim();
+
+                let wallData = firstRow.cells[1].textContent.trim()[0];
+
                 if (wallData === '?') {
-                    clickLink(firstRow, 'a.farm_icon_b');
+                    clickLink(thirdRow.cells[0], 'a.farm_icon_b');
                 }
             }
         }
@@ -94,10 +100,11 @@ function clickLink(cell, selector) {
 }
 
 function farm() {
-    // if (document.querySelector('#mobileHeader')) {
-    //     farmMobile();
-    // } else {
+    if (document.querySelector('#mobileHeader')) {
+        farmMobile();
+    } else {
         farmDesktop();
-    // }
+    }
 }
+
 farm();
