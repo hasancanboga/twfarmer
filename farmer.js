@@ -1,53 +1,59 @@
-var rows = document.querySelectorAll('#plunder_list tbody tr');
+function farm() {
 
-var index = 0;
+    let rows = document.querySelectorAll('#plunder_list tbody tr');
 
-var interval = setInterval(function () {
-    if (index >= rows.length) {
-        clearInterval(interval);
-        return;
-    }
+    let index = 0;
 
-    var row = rows[index];
+    let interval = setInterval(function () {
+        if (index >= rows.length) {
+            clearInterval(interval);
+            return;
+        }
 
-    var secondCell = row.cells[1];
+        let row = rows[index];
 
-    if (!secondCell) {
-        index++;
-        return;
-    }
+        let secondCell = row.cells[1];
 
-    var seventhCell = row.cells[6];
+        if (!secondCell) {
+            index++;
+            return;
+        }
 
-    var ninthCell = row.cells[8];
-    var tenthCell = row.cells[9];
+        let seventhCell = row.cells[6];
 
-    var img = secondCell.querySelector('img[src*="green.png"], img[src*="yellow.png"]');
-    if (img) {
-        var isGreen = img.src.includes('green.png');
-        var isYellow = img.src.includes('yellow.png');
+        let ninthCell = row.cells[8];
+        let tenthCell = row.cells[9];
 
-        if (isGreen) {
-            var seventhData = seventhCell.textContent.trim();
-            if (seventhData === '?' || seventhData === '0') {
-                clickLink(ninthCell, 'a.farm_icon_a');
-            } else if (seventhData === '1') {
-                clickLink(tenthCell, 'a.farm_icon_b');
-            }
-        } else if (isYellow) {
-            var seventhData = seventhCell.textContent.trim();
-            if (seventhData === '?') {
-                clickLink(tenthCell, 'a.farm_icon_b');
+        let img = secondCell.querySelector('img[src*="green.png"], img[src*="yellow.png"]');
+        if (img) {
+            let isGreen = img.src.includes('green.png');
+            let isYellow = img.src.includes('yellow.png');
+
+            if (isGreen) {
+                let seventhData = seventhCell.textContent.trim();
+                if (seventhData === '?' || seventhData === '0') {
+                    clickLink(ninthCell, 'a.farm_icon_a');
+                } else if (seventhData === '1') {
+                    clickLink(tenthCell, 'a.farm_icon_b');
+                }
+            } else if (isYellow) {
+                let seventhData = seventhCell.textContent.trim();
+                if (seventhData === '?') {
+                    clickLink(tenthCell, 'a.farm_icon_b');
+                }
             }
         }
-    }
 
-    index++;
-}, 250);
+        index++;
+    }, 250);
+
+}
 
 function clickLink(cell, selector) {
-    var link = cell.querySelector(selector);
+    let link = cell.querySelector(selector);
     if (link) {
         link.click();
     }
 }
+
+farm();
