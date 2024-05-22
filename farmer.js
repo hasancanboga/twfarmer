@@ -1,5 +1,3 @@
-javascript:
-
 function farmDesktop() {
 
     let rows = document.querySelectorAll('#plunder_list tbody tr');
