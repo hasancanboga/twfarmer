@@ -1,43 +1,41 @@
-javascript:
+var rows = document.querySelectorAll('#plunder_list tbody tr');
 
-let rows = document.querySelectorAll('#plunder_list tbody tr');
+var index = 0;
 
-let index = 0;
-
-let interval = setInterval(function () {
+var interval = setInterval(function () {
     if (index >= rows.length) {
         clearInterval(interval);
         return;
     }
 
-    let row = rows[index];
+    var row = rows[index];
 
-    let secondCell = row.cells[1];
+    var secondCell = row.cells[1];
 
     if (!secondCell) {
         index++;
         return;
     }
 
-    let seventhCell = row.cells[6];
+    var seventhCell = row.cells[6];
 
-    let ninthCell = row.cells[8];
-    let tenthCell = row.cells[9];
+    var ninthCell = row.cells[8];
+    var tenthCell = row.cells[9];
 
-    let img = secondCell.querySelector('img[src*="green.png"], img[src*="yellow.png"]');
+    var img = secondCell.querySelector('img[src*="green.png"], img[src*="yellow.png"]');
     if (img) {
-        let isGreen = img.src.includes('green.png');
-        let isYellow = img.src.includes('yellow.png');
+        var isGreen = img.src.includes('green.png');
+        var isYellow = img.src.includes('yellow.png');
 
         if (isGreen) {
-            let seventhData = seventhCell.textContent.trim();
+            var seventhData = seventhCell.textContent.trim();
             if (seventhData === '?' || seventhData === '0') {
                 clickLink(ninthCell, 'a.farm_icon_a');
             } else if (seventhData === '1') {
                 clickLink(tenthCell, 'a.farm_icon_b');
             }
         } else if (isYellow) {
-            let seventhData = seventhCell.textContent.trim();
+            var seventhData = seventhCell.textContent.trim();
             if (seventhData === '?') {
                 clickLink(tenthCell, 'a.farm_icon_b');
             }
@@ -48,7 +46,7 @@ let interval = setInterval(function () {
 }, 250);
 
 function clickLink(cell, selector) {
-    let link = cell.querySelector(selector);
+    var link = cell.querySelector(selector);
     if (link) {
         link.click();
     }
