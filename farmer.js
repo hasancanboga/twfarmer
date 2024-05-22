@@ -94,10 +94,10 @@ function clickLink(cell, selector) {
 }
 
 function farm() {
-    if (document.querySelector('#mobileHeader')) {
-        farmMobile();
-    } else {
+    // if (document.querySelector('#mobileHeader')) {
+    //     farmMobile();
+    // } else {
         farmDesktop();
-    }
+    // }
 }
 farm();
