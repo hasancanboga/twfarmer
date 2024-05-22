@@ -1,4 +1,4 @@
-function farm() {
+function farmDesktop() {
 
     let rows = document.querySelectorAll('#plunder_list tbody tr');
 
@@ -49,6 +49,43 @@ function farm() {
 
 }
 
+function farmMobile() {
+    let rows = Array.from(document.querySelectorAll('tbody tr'));
+    let index = 0;
+
+    let interval = setInterval(function () {
+        if (index >= rows.length) {
+            clearInterval(interval);
+            return;
+        }
+
+        let firstRow = rows[index];
+        let thirdRow = rows[index + 2];
+
+        let img = firstRow.querySelector('img[src*="green.png"], img[src*="yellow.png"]');
+        if (img) {
+            let isGreen = img.src.includes('green.png');
+            let isYellow = img.src.includes('yellow.png');
+
+            if (isGreen) {
+                let wallData = thirdRow.cells[0].textContent.trim();
+                if (wallData === '?' || wallData === '0') {
+                    clickLink(firstRow, 'a.farm_icon_a');
+                } else if (wallData === '1') {
+                    clickLink(firstRow, 'a.farm_icon_b');
+                }
+            } else if (isYellow) {
+                let wallData = thirdRow.cells[0].textContent.trim();
+                if (wallData === '?') {
+                    clickLink(firstRow, 'a.farm_icon_b');
+                }
+            }
+        }
+
+        index += 3;
+    }, 250);
+}
+
 function clickLink(cell, selector) {
     let link = cell.querySelector(selector);
     if (link) {
@@ -56,4 +93,11 @@ function clickLink(cell, selector) {
     }
 }
 
+function farm() {
+    if (document.querySelector('#mobileHeader')) {
+        farmMobile();
+    } else {
+        farmDesktop();
+    }
+}
 farm();
