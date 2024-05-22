@@ -71,7 +71,9 @@ function farmMobile() {
 
             if (isGreen) {
 
-                let wallData = firstRow.cells[1].textContent.trim()[0];
+                let cell = firstRow.cells[1];
+                let wallDataElement = cell.querySelector('img[src*="wall.png"]').nextSibling;
+                let wallData = wallDataElement.textContent.trim()[0];
 
                 if (wallData === '?' || wallData === '0') {
                     clickLink(thirdRow.cells[0], 'a.farm_icon_a');
@@ -80,7 +82,9 @@ function farmMobile() {
                 }
             } else if (isYellow) {
 
-                let wallData = firstRow.cells[1].textContent.trim()[0];
+                let cell = firstRow.cells[1];
+                let wallDataElement = cell.querySelector('img[src*="wall.png"]').nextSibling;
+                let wallData = wallDataElement.textContent.trim()[0];
 
                 if (wallData === '?') {
                     clickLink(thirdRow.cells[0], 'a.farm_icon_b');
