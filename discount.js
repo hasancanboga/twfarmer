@@ -1,3 +1,4 @@
+// Only works in HQ page
 function findDiscounts() {
     let buildingRows = document.querySelectorAll('#buildings tr[id^="main_buildrow_"]');
 
